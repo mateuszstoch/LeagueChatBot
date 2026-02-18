@@ -1,6 +1,7 @@
 import pygame
 from time import sleep
 import win32gui, win32con, win32api
+from math import ceil
 
 TOGGLE_UI = pygame.USEREVENT + 1
 NEXT_PAGE = pygame.USEREVENT + 2
@@ -23,6 +24,7 @@ class GUI:
         self.font = pygame.font.SysFont('Arial', 20)
         self.screen = pygame.display.set_mode((self.window_width, self.window_height), pygame.NOFRAME) 
         self.hwnd = pygame.display.get_wm_info()['window']
+        self.align_to_league()
         
         styles = win32gui.GetWindowLong(self.hwnd, win32con.GWL_EXSTYLE)
         win32gui.SetWindowLong(self.hwnd, win32con.GWL_EXSTYLE, styles | win32con.WS_EX_LAYERED | win32con.WS_EX_TRANSPARENT)
@@ -49,10 +51,12 @@ class GUI:
         
         if self.page.category is None:
             items = list(self.text_lines.keys())
-            header = "Select Category (6-0):"
+            page_count = ceil(len(self.text_lines)/5)
+            header = "Select Category:"
         else:
             items = self.text_lines.get(self.page.category, [])
-            header = f"[{self.page.category}] Select Message (6-0):"
+            page_count = ceil(len((self.text_lines).get(self.page.category))/5)
+            header = f"{self.page.category}: \n "
             
         title = self.font.render(header, True, (255, 255, 255))
         self.screen.blit(title, (5, 5))
@@ -64,6 +68,11 @@ class GUI:
             text = f"{(i+6)% 10}. {item}"
             surf = self.font.render(text, True, (200, 200, 200))
             self.screen.blit(surf, (10, 30 + i * 25))
+
+        text = f"{self.page.page_number+1}/{page_count}"
+        surf = self.font.render(text, True, (200, 200, 200))
+        self.screen.blit(surf, (self.window_width-30, self.window_height-30))
+        
 
     
     def run(self):  

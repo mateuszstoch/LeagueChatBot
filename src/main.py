@@ -1,8 +1,17 @@
 from pynput import keyboard
 import time
 from gui import GUI
-import text_lines
-import os
+import os,sys , json
+
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    
+json_path = os.path.join(BASE_DIR, "text_lines.json")
+
+with open(json_path,"r",encoding="utf-8") as file:
+    text_lines = json.load(file)
 
 #create keyboard controller
 controller = keyboard.Controller()
@@ -43,7 +52,7 @@ def exit_app(gui, hotkey):
         os._exit(0)
 
 gui = GUI()
-gui.load_text_lines(text_lines.data)
+gui.load_text_lines(text_lines)
 
 #register listeners 
 hotkey = keyboard.GlobalHotKeys({
