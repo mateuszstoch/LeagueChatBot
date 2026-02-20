@@ -91,8 +91,8 @@ gui = GUI(text_lines,config)
 #register listeners 
 hotkey = keyboard.GlobalHotKeys({
     config["hotkeys"]["toggle_gui"] : gui.trigger_toggle, 
-    config["hotkeys"]["previous_page"]: gui.trigger_next,
-    config["hotkeys"]["next_page"]: gui.trigger_prev,
+    config["hotkeys"]["next_page"]: gui.trigger_next,
+    config["hotkeys"]["previous_page"]: gui.trigger_prev,
     config["hotkeys"]["back_to_categories"]: gui.back_to_categories,
     config["hotkeys"]["pick_1"]: lambda: select_item(gui,0),
     config["hotkeys"]["pick_2"]: lambda: select_item(gui,1),
