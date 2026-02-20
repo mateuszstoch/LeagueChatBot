@@ -78,3 +78,8 @@ toggle_chat = '<insert>'
 ## ⚠️ Warning
 
 This tool is an external macro script. Use it at your own risk. We recommend reviewing your game developer's policy regarding "Third Party Tools".
+
+## 📚 License
+This software is licensed under the PolyForm Noncommercial License 1.0.0.
+It is free for personal, hobby, and educational use. Commercial use is strictly prohibited.
+See the LICENSE file for the full text.
